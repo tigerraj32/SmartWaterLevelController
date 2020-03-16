@@ -219,8 +219,6 @@ void loop() {
         Sensor::shared()->send(Output::buzzer, FALSE);
       }
   }
-
-  
-
+  //run timer
   appTimer.run();
 }
