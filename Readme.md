@@ -66,7 +66,8 @@ void loop(){
 }
 
 ```
-
+### preview
+![rgb indicator](./src/resource/rgb.gif)
 
 
 ## Debounce Interrupt
