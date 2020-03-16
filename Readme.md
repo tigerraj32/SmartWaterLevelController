@@ -29,6 +29,44 @@ Blink interval can be controlled with setter  **setupBlinkInterval**
 rgbIndicator->setupBlinkInterval(300); //blink interval setup
 ```
 
+## RGB Indicator to represent multiple variables.
+
+RGBIndicator is capable of displaying multiple variable status using single RGB led with blink count for each variable.
+
+For eg. 
+- variable a = 5; //blink 5 time with color red
+- variable b = 3  //blink 3 time with color green
+- variable c = 2;  //blink 2 time with color blue
+
+```c
+#include <SimpleTimer.h>
+
+SimpleTimer appTimer;
+
+auto a = RGBStatus(Color(red));
+auto b = RGBStatus(Color(green));
+auto b = RGBStatus(Color(blue));
+
+void rgbHandler(){
+  // //Read input signal first
+  a.displayCount = 5;
+  b.displayCount = 3;
+  c.displayCount = 1;
+  RGBStatus statusArray[] = {a, b, c};
+
+  rgbIndicator->glowStatusCount(statusArray, 3);
+}
+
+void setup(){
+    appTimer.setInterval(200, rgbHandler);  
+}
+
+void loop(){
+    appTimer.run();
+}
+
+```
+
 
 
 ## Debounce Interrupt
