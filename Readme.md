@@ -6,3 +6,6 @@
 ## kmap logic table for 6 sensor.
 ![kmap](./src/resource/kmap-logic.png)
 
+
+## Schematics for water level controller
+![schenatics](./src/resource/schematics.png)
