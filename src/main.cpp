@@ -39,18 +39,22 @@ void readTank(){
    //set rgb status for top tank
     switch (Sensor::shared()->topTankSequence){
       case WaterStatus::empty:
+        Serial.println("Empty: 1");
         topTankStatus.displayCount = 1;
         break;
 
       case WaterStatus::level1:
+        Serial.println("l1: 2");
         topTankStatus.displayCount = 2;
         break;
 
       case WaterStatus::level2:
+        Serial.println("l2: 3");
         topTankStatus.displayCount = 3;
         break;
 
       case WaterStatus::level3:
+        Serial.println("l3: 4");
         topTankStatus.displayCount = 4;
         break;
       default:
@@ -75,11 +79,11 @@ void readTank(){
         bottomTankStatus.displayCount = 4;
         break;
       default:
-        Serial.println("Invalid case");
+        Serial.println("Invalid tank read case");
         break;
     }
   
-  };
+  }
 
   Sensor::shared()->toString();
 }
@@ -93,19 +97,19 @@ void readManualSwitch(){
         {
         case MotorMode::automatic:
           Sensor::shared()->mode = MotorMode::automatic;
-          Serial.println("automatic mode");
+          Serial.println("----------------- Mode Switch:- automatic mode ----------------");
           motorMode.displayCount = 1;
           break;
 
         case MotorMode::manualOnAutoOff:
             Sensor::shared()->mode = MotorMode::manualOnAutoOff;
-            Serial.println("manual on auto off mode");
+            Serial.println("----------------- Mode Switch:- manual on auto off mode ----------------");
           motorMode.displayCount = 2;
             break;
 
         case MotorMode::manualOnManualOff:
             Sensor::shared()->mode = MotorMode::manualOnManualOff;
-            Serial.println("manual on manual off mode");
+            Serial.println("----------------- Mode Switch:- manual on manual off mode ----------------");
             motorMode.displayCount = 3;
             break;            
 
@@ -126,9 +130,9 @@ void controlMotor(){
     if (Sensor::shared()->mode == MotorMode::manualOnAutoOff){
       Sensor::shared()->motor = ON;
       Sensor::shared()->send(Output::motor, Sensor::shared()->motor);
-      //after turning on motor, need to set config to auto other motor will on and off.
+      //after turning on motor, need to set config to auto otherwise  motor will on and off.
       Sensor::shared()->mode = MotorMode::automatic;
-      motorMode.displayCount = 1;
+      //motorMode.displayCount = 1;
     }
     
 
@@ -145,7 +149,7 @@ void controlMotor(){
 
         Sensor::shared()->send(Output::motor,Sensor::shared()->motor);
       }else{
-        //keep running motot until top tank is full once  motor is started.
+        //keep running motor until top tank is full once  motor is started.
         if ((Sensor::shared()->t1 == FULL) & (Sensor::shared()->t2 == FULL) &(Sensor::shared()->t3 == FULL) ){
           Sensor::shared()->motor = OFF;
           Sensor::shared()->send(Output::motor,Sensor::shared()->motor);

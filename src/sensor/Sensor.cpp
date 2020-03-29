@@ -14,7 +14,7 @@ Sensor::Sensor(){
     b2= LOW;
     b3 = LOW;
 
-    tankSequence = 0x00;
+    tankSequence = 0xff;
     topTankSequence = 0x00;
     bottomTankSequence = 0x00;
     manualSwPressCount = 0;
